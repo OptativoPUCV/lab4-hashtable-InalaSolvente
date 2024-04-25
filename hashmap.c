@@ -88,11 +88,12 @@ if(map==NULL || key==NULL) return NULL;
   unsigned long pos = hash(key,map->capacity);
   while(map->buckets[pos]!=NULL){
     if(strcmp(map->buckets[pos]->key,key) != 0) {
-      map->current++;
+
       pos++;
     }
     else{
-      printf("%ld %ld",map->current,pos);
+      //printf("%ld %ld",map->current,pos);
+      map->current = pos;
       return map->buckets[pos];
     } 
   }
