@@ -84,7 +84,8 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
-  if(map==NULL || key==NULL) return NULL;
+/*
+if(map==NULL || key==NULL) return NULL;
   unsigned long pos = hash(key,map->capacity);
   while(map->buckets[pos]!=NULL){
     if(strcmp(map->buckets[pos]->key,key) != 0) {
@@ -94,6 +95,19 @@ Pair * searchMap(HashMap * map,  char * key) {
     else return map->buckets[pos];
   }
   return NULL;
+*/
+    if (map == NULL || key == NULL) return NULL;
+
+    unsigned long pos = hash(key, map->capacity);
+
+    while (map->buckets[pos] != NULL) {
+      if (strcmp(map->buckets[pos]->key, key) == 0) {
+        return map->buckets[pos];
+      }
+      pos = (pos + 1) % map->capacity; // Avanza al siguiente bucket circularmente
+    }
+
+    return NULL;
 }
 
 Pair * firstMap(HashMap * map) {
