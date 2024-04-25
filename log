@@ -1,0 +1,11 @@
+Thu 25 Apr 2024 03:40:28 PM UTC: 
+ hashmap.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘createMap’:
+hashmap.c:66:9: error: ‘*mapa.buckets’ may be used uninitialized [-Werror=maybe-uninitialized]
+   66 |     mapa->buckets[i] = NULL;
+      |     ~~~~^~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+f0e85a9
