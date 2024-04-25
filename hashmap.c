@@ -44,6 +44,7 @@ void insertMap(HashMap * map, char * key, void * value) {
   Pair *par = createPair(key,value);
   unsigned long pos = hash(key,map->capacity);
   while(map->buckets[pos]!=NULL){
+    printf("%ld\n",pos);
     pos++;
     map->current++;
   }
