@@ -49,6 +49,7 @@ void insertMap(HashMap * map, char * key, void * value) {
   }
   if (pos > map->capacity) return;
   if(map->buckets[pos] == NULL) {
+    printf("%ld",pos);
     map->buckets[pos] = par;
     map->size++;
     map->current = pos;
