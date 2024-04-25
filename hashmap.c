@@ -86,7 +86,10 @@ Pair * searchMap(HashMap * map,  char * key) {
   if(map==NULL || key==NULL) return NULL;
   unsigned long pos = hash(key,map->capacity);
   while(map->buckets[pos]!=NULL){
-    if(strcmp(map->buckets[pos]->key,key) != 0) pos++;
+    if(strcmp(map->buckets[pos]->key,key) != 0) {
+      map->current++;
+      pos++;
+    }
     else return map->buckets[pos];
   }
   return NULL;
