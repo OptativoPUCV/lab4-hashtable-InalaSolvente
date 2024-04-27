@@ -39,7 +39,7 @@ int is_equal(void* key1, void* key2){
 }
 
   
-void insertMap(HashMap * map, char * key, void * value) {
+/*void insertMap(HashMap * map, char * key, void * value) {
   if(map==NULL || key==NULL) return;
   Pair *par = createPair(key,value);
   unsigned long pos = hash(key,map->capacity);
@@ -52,56 +52,62 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->size++;
     map->current = pos;
   }
+}*/
+
+void insertMap(HashMap *map, char *key, void *value) {
+    if (map == NULL || key == NULL) return;
+
+    Pair *par = createPair(key, value);
+    if (par == NULL) return; // Manejo de error de creación de par
+
+    unsigned long pos = hash(key, map->capacity);
+    unsigned long initial_pos = pos; // Guardamos la posición inicial para detectar un ciclo completo
+
+    while (map->buckets[pos] != NULL) {
+        if (strcmp(map->buckets[pos]->key, key) == 0) {
+            // La clave ya existe en el mapa, no insertar
+            free(par); // Liberar memoria del par creado
+            return;
+        }
+        pos = (pos + 1) % map->capacity; // Avanzar a la siguiente posición (manejo de colisiones)
+        if (pos == initial_pos) {
+            // Se ha completado un ciclo completo sin encontrar un cubo vacío, el mapa está lleno
+            free(par); // Liberar memoria del par creado
+            return;
+        }
+    }
+
+    // Se ha encontrado una posición vacía, insertar el par clave-valor
+    map->buckets[pos] = par;
+    map->size++;
+    map->current = pos;
 }
-
-/*
-- Implemente la función void enlarge(HashMap * map). Esta función agranda la capacidad del arreglo buckets y reubica todos sus elementos. Para hacerlo es recomendable mantener referenciado el arreglo actual/antiguo de la tabla con un puntero auxiliar. Luego, los valores de la tabla se reinicializan con un nuevo arreglo con el doble de capacidad. Por último los elementos del arreglo antiguo se insertan en el mapa vacío con el método insertMap. Puede seguir los siguientes pasos:
-
-a - Cree una variable auxiliar de tipo Pair** para matener el arreglo map->buckets (old_buckets);
-
-b - Duplique el valor de la variable capacity.
-
-c - Asigne a map->buckets un nuevo arreglo con la nueva capacidad.
-
-d - Inicialice size a 0.
-
-e - Inserte los elementos del arreglo old_buckets en el mapa (use la función insertMap que ya implementó).
-*/
-
 
 
 void enlarge(HashMap * map) {
-    enlarge_called = 1; //no borrar (testing purposes)
-      if (map == NULL) return;
+  enlarge_called = 1; //no borrar (testing purposes)
+  if (map == NULL) return;
+  Pair **old_buckets = map->buckets;
+  unsigned int old_capacity = map->capacity;
 
-      // Paso a: Crear una variable auxiliar para mantener el arreglo map->buckets (old_buckets)
-      Pair **old_buckets = map->buckets;
-      unsigned int old_capacity = map->capacity;
+  map->capacity *= 2;
 
-      // Paso b: Duplicar el valor de la variable capacity
-      map->capacity *= 2;
-
-      // Paso c: Asignar a map->buckets un nuevo arreglo con la nueva capacidad
-      map->buckets = (Pair **)malloc(map->capacity * sizeof(Pair *));
-      if (map->buckets == NULL) {
-          // Manejo de error de asignación de memoria
-          map->capacity = old_capacity; // Restaurar la capacidad original
-          return;
+  // Paso c: Asignar a map->buckets un nuevo arreglo con la nueva capacidad
+  map->buckets = (Pair **)malloc(map->capacity * sizeof(Pair *));
+  if (map->buckets == NULL) {
+    map->capacity = old_capacity; 
+    return;
+    }
+    
+  map->size = 0;
+      
+  for (unsigned int i = 0; i < old_capacity; i++) {
+    if (old_buckets[i] != NULL && old_buckets[i]->key != NULL) {
+    insertMap(map, old_buckets[i]->key, old_buckets[i]->value);
       }
-
-      // Paso d: Inicializar size a 0
-      map->size = 0;
-
-      // Paso e: Insertar los elementos del arreglo old_buckets en el mapa
-      for (unsigned int i = 0; i < old_capacity; i++) {
-          if (old_buckets[i] != NULL && old_buckets[i]->key != NULL) {
-              insertMap(map, old_buckets[i]->key, old_buckets[i]->value);
-          }
-      }
-
-      // Liberar la memoria del arreglo antiguo
-      free(old_buckets);
-  }
+    }
+  free(old_buckets);
+}
 
 
 
