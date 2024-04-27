@@ -160,3 +160,8 @@ hashmap.c:89:30: error: assignment to ‘void *’ from ‘int’ makes pointer 
 cc1: all warnings being treated as errors
 Compilation failed
 03eee5e
+Sat 27 Apr 2024 08:28:43 PM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  0|0
+cf67ad2

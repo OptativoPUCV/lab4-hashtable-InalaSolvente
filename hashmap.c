@@ -86,7 +86,7 @@ void eraseMap(HashMap * map,  char * key) {
   }
   if (pos >= map->capacity) return;
   if(map->buckets[pos] == NULL) {
-    map->buckets[pos]->value = -1;
+    map->buckets[pos]->value = NULL;
     map->size--;
     map->current = pos;
   }
