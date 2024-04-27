@@ -210,3 +210,14 @@ Sat 27 Apr 2024 08:37:00 PM UTC:
  tests:  11|3
 total_score: 40/70
 8ba64db
+Sat 27 Apr 2024 08:39:41 PM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘eraseMap’:
+hashmap.c:83:9: error: unused variable ‘par’ [-Werror=unused-variable]
+   83 |   Pair *par = createPair(NULL,NULL);
+      |         ^~~
+cc1: all warnings being treated as errors
+Compilation failed
+b6faab0
