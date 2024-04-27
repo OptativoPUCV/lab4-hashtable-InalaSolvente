@@ -50,7 +50,7 @@ void insertMap(HashMap *map, char *key, void *value) {
       free(par);
       return;
       }
-    pos = (pos + 1) % map->capacity;
+    pos = (pos + 1)
     if (pos == initial_pos) {
       free(par);
       return;
