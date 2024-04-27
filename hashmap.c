@@ -38,49 +38,27 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
-  
-/*void insertMap(HashMap * map, char * key, void * value) {
-  if(map==NULL || key==NULL) return;
-  Pair *par = createPair(key,value);
-  unsigned long pos = hash(key,map->capacity);
-  while(map->buckets[pos]!=NULL){
-    pos++;
-  }
-  if (pos >= map->capacity) return;
-  if(map->buckets[pos] == NULL) {
-    map->buckets[pos] = par;
-    map->size++;
-    map->current = pos;
-  }
-}*/
 
 void insertMap(HashMap *map, char *key, void *value) {
-    if (map == NULL || key == NULL) return;
-
-    Pair *par = createPair(key, value);
-    if (par == NULL) return; // Manejo de error de creación de par
-
-    unsigned long pos = hash(key, map->capacity);
-    unsigned long initial_pos = pos; // Guardamos la posición inicial para detectar un ciclo completo
-
-    while (map->buckets[pos] != NULL) {
-        if (strcmp(map->buckets[pos]->key, key) == 0) {
-            // La clave ya existe en el mapa, no insertar
-            free(par); // Liberar memoria del par creado
-            return;
-        }
-        pos = (pos + 1) % map->capacity; // Avanzar a la siguiente posición (manejo de colisiones)
-        if (pos == initial_pos) {
-            // Se ha completado un ciclo completo sin encontrar un cubo vacío, el mapa está lleno
-            free(par); // Liberar memoria del par creado
-            return;
-        }
-    }
-
-    // Se ha encontrado una posición vacía, insertar el par clave-valor
-    map->buckets[pos] = par;
-    map->size++;
-    map->current = pos;
+  if (map == NULL || key == NULL) return;
+  Pair *par = createPair(key, value);
+  if (par == NULL) return;
+  unsigned long pos = hash(key, map->capacity);
+  unsigned long initial_pos = pos;
+  while (map->buckets[pos] != NULL) {
+    if (strcmp(map->buckets[pos]->key, key) == 0) {
+      free(par);
+      return;
+      }
+    pos = (pos + 1) % map->capacity;
+    if (pos == initial_pos) {
+      free(par);
+      return;
+      }
+  }
+  map->buckets[pos] = par;
+  map->size++;
+  map->current = pos;
 }
 
 
