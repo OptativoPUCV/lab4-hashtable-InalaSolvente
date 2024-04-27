@@ -80,14 +80,14 @@ HashMap * createMap(long capacity) {
 
 void eraseMap(HashMap * map,  char * key) {    
   if(map==NULL || key==NULL) return;
-  //Pair *par = createPair(NULL,NULL);
+  Pair *par = createPair(NULL,NULL);
   unsigned long pos = hash(key,map->capacity);
   while(map->buckets[pos]!=NULL && strcmp(map->buckets[pos]->key,key)!= 0){
     pos++;
   }
   if (pos >= map->capacity) return;
   if(map->buckets[pos]!=NULL && strcmp(map->buckets[pos]->key,key) == 0) {
-    free(map->buckets[pos]);
+    map->buckets[pos] = par;
     map->size--;
     map->current = pos;
   }
