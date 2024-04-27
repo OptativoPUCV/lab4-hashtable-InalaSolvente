@@ -257,3 +257,18 @@ Sat 27 Apr 2024 08:42:44 PM UTC:
  tests:  12|3
 total_score: 40/70
 a517757
+Sat 27 Apr 2024 08:46:12 PM UTC: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘nextMap’:
+hashmap.c:125:17: error: expected ‘;’ before ‘:’ token
+  125 |   map->current++:
+      |                 ^
+      |                 ;
+hashmap.c:127:1: error: control reaches end of non-void function [-Werror=return-type]
+  127 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+b0b2383
