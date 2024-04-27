@@ -113,7 +113,10 @@ if(map==NULL || key==NULL) return NULL;
 Pair * firstMap(HashMap * map) {
   if(map==NULL) return NULL;
   for(unsigned int i = 0; i < map->capacity; i++){
-    if(map->buckets[i]!=NULL && map->buckets[i]->key != NULL) return map->buckets[i];
+    if(map->buckets[i]!=NULL && map->buckets[i]->key != NULL) {
+      map->current = i;
+      return map->buckets[i];
+    }
   }
   return NULL;
 }
