@@ -103,7 +103,6 @@ void enlarge(HashMap * map) {
       free(old_buckets);
   }
 
-}
 
 
 HashMap * createMap(long capacity) {
