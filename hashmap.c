@@ -82,7 +82,7 @@ void eraseMap(HashMap * map,  char * key) {
   if(map==NULL || key==NULL) return;
   Pair *par = createPair(NULL,NULL);
   unsigned long pos = hash(key,map->capacity);
-  while(map->buckets[pos]!=NULL){
+  while(map->buckets[pos]!=NULL||map->buckets[pos]->key != key){
     pos++;
   }
   if (pos >= map->capacity) return;
