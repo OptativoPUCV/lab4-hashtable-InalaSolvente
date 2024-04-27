@@ -122,6 +122,6 @@ Pair * firstMap(HashMap * map) {
 }
 
 Pair * nextMap(HashMap * map) {
-  map->current++:
+  map->current++;
   return map->buckets[map->current];
 }
