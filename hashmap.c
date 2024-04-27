@@ -48,9 +48,8 @@ void insertMap(HashMap * map, char * key, void * value) {
   }
   if (pos >= map->capacity) return;
   if(map->buckets[pos] == NULL) {
-    printf("%ld",pos);
-    map->buckets[pos] = par;
-    map->size++;
+    map->buckets[pos]->value = -1;
+    map->size--;
     map->current = pos;
   }
 }
@@ -80,8 +79,17 @@ HashMap * createMap(long capacity) {
 }
 
 void eraseMap(HashMap * map,  char * key) {    
-
-
+  if(map==NULL || key==NULL) return;
+  unsigned long pos = hash(key,map->capacity);
+  while(map->buckets[pos]!=NULL||map->buckets[pos]->key!=key){
+    pos++;
+  }
+  if (pos >= map->capacity) return;
+  if(map->buckets[pos] == NULL) {
+    map->buckets[pos] = par;
+    map->size++;
+    map->current = pos;
+  }
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
