@@ -123,7 +123,7 @@ Pair * firstMap(HashMap * map) {
 
 Pair *nextMap(HashMap *map) {
   if (map == NULL || map->current >= map->capacity - 1) return NULL;
-
   map->current++;
+  while(map->buckets[map->current] == NULL || map->buckets[map->current]->key == NULL) map->current++;
   return map->buckets[map->current];
 }
