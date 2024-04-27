@@ -149,3 +149,14 @@ hashmap.c:88:25: note: each undeclared identifier is reported only once for each
 cc1: all warnings being treated as errors
 Compilation failed
 bf10626
+Sat 27 Apr 2024 08:28:15 PM UTC: 
+ hashmap.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘eraseMap’:
+hashmap.c:89:30: error: assignment to ‘void *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   89 |     map->buckets[pos]->value = -1;
+      |                              ^
+cc1: all warnings being treated as errors
+Compilation failed
+03eee5e
