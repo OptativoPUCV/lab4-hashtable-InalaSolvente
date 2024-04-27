@@ -44,17 +44,17 @@ void insertMap(HashMap *map, char *key, void *value) {
   Pair *par = createPair(key, value);
   if (par == NULL) return;
   unsigned long pos = hash(key, map->capacity);
-  unsigned long initial_pos = pos;
+  //unsigned long initial_pos = pos;
   while (map->buckets[pos] != NULL) {
     if (strcmp(map->buckets[pos]->key, key) == 0) {
       free(par);
       return;
       }
     pos = (pos + 1)
-    if (pos == initial_pos) {
+    /*if (pos == initial_pos) {
       free(par);
       return;
-      }
+      }*/
   }
   map->buckets[pos] = par;
   map->size++;

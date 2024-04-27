@@ -366,3 +366,17 @@ hashmap.c:47:17: error: unused variable ‘initial_pos’ [-Werror=unused-variab
 cc1: all warnings being treated as errors
 Compilation failed
 954a9e1
+Sat 27 Apr 2024 09:29:48 PM UTC: 
+ hashmap.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:53:20: error: expected ‘;’ before ‘}’ token
+   53 |     pos = (pos + 1)
+      |                    ^
+      |                    ;
+......
+   58 |   }
+      |   ~                 
+Compilation failed
+2d86fd8
